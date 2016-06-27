@@ -108,15 +108,15 @@ class StatusCommand extends Command
         $this->addFlags($builder, $options);
 
         $process = $builder->getProcess();
-        $result  = array('branch' => null, 'changes' => array());
+        $result  = array('changes' => array());
         $output  = $this->git->run($process);
 
-        list($branch, $changes) = preg_split('/(\0|\n)/', $output, 2);
+        list($changes) = preg_split('/ ([^ ]*)$/', $output, 2);
         $lines  = $this->split($changes, true);
 
-        if (preg_match('/ ([^ ]*)$/', $branch, $matches)) {
-            $result['branch'] = $matches[1];
-        }
+        /*if (preg_match('/ ([^ ]*)$/', $branch, $matches)) {
+            //$result['branch'] = $matches[1];
+        }*/
 
         foreach ($lines as $line) {
             $result['changes'][] = array(
