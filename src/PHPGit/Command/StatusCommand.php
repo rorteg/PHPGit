@@ -103,6 +103,7 @@ class StatusCommand extends Command
         $builder = $this->git->getProcessBuilder()
             ->add('status')
             ->add('--porcelain')->add('-s')->add('--null');
+            
 
         $this->addFlags($builder, $options);
 
